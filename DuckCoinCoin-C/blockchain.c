@@ -124,33 +124,12 @@ void delete_Blockchain (Blockchain blockchain){
 
 
 /*-----------------------------VERIF-------------------------------*/
-/*
-int verif_hash_block(Block b,int diff) {
-	//on stock les valeurs de base 
-	char str[SHA256_BLOCK_SIZE*2 + 1] ;
-	int stock = b->nonce ;
-	b->nonce = 0 ;
-	strcpy(str,b->hashCour) ;
-	strcpy(b->hashCour,"") ;
-	minage(b,diff) ;
-	if (strcmp(str,b->hashCour) || b->nonce != stock){
-		// si le recalcul du hash et la nonce sont différents
-		// du block de base alors on remet les anciennes valeurs
-		strcpy(b->hashCour,str) ;
-		b->nonce = stock ;
-		return 1 ;
-	}
-	return 0 ;	
-}
-*/
 
 int verif_hash_block(Blockchain B,Block b) {
 	bool unic = true ;
 	Block itr = B->sentinel->next ;
 	while(itr != B->sentinel && unic){
-		//printf("%s\n%s\n",itr->hashCour,b->hashCour);
 		if (itr != b && strcmp(itr->hashCour,b->hashCour) == 0){
-			//printf("%s\n%s\n",itr->hashCour,b->hashCour);
 			unic = false ;
 		}
 		itr = itr->next ;

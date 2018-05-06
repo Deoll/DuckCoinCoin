@@ -1,7 +1,3 @@
-/*
-j’ai créé la structure pour faire une liste avec sentinelle comme c’est demandé, Je ne rien changé, j’ai seulement ajouté la structure et quelque fonction. Pour la version 1 j’ai fait une seule fonction qui renvoi une chaîne de caractères et pour la version 2 j’ai fait de fonctions qui réalisent des opérations sur les listes.
-Par contre je n’ai rien changé dans le .h parce que je ne suis pas en vie ;)
-*/
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -119,7 +115,7 @@ void delete_transaction_deque(TransactionDeque t){
 }
 
 
-int get_index(Transaction transaction) {
+int get_index(Transaction transaction) { 
     return transaction->index ;
 }
 
@@ -149,7 +145,6 @@ void hash_Merkle_tree(TransactionDeque t, char *hash){
         sha256ofString(c,hashTab[taille/2-1]) ;
         itr = t->sentinel->prev->prev ;
         cpt = taille/2-2 ;
-        //printf("Chaine : %s, Hash init : %s\n", c,hashTab[taille/2-1]);
     }
     else {
         cpt = taille/2-1 ;
@@ -163,12 +158,10 @@ void hash_Merkle_tree(TransactionDeque t, char *hash){
         sha256ofString(c,hashTab[cpt]) ;
         cpt-- ;
         itr = itr->prev->prev ;
-        //printf("Chaine : %s, Hash init : %s\n", c,hashTab[cpt+1]);
     }
 
 
     while (taille/2 > 1) {
-        //printf("Hash dans tableau : %s\n",hashTab[0]);
         taille = taille/2 ;
         cpt = 0 ;
         if (taille%2==1) {
@@ -185,11 +178,12 @@ void hash_Merkle_tree(TransactionDeque t, char *hash){
     strcpy(hash,hashTab[0]);
 } 
 
-void display_info(TransactionDeque t){
+// fonction pour tester les valeurs d'un bloc
+/*void display_info(TransactionDeque t){
     for(Transaction itr = t->sentinel->next;itr != t->sentinel;itr=itr->next){
         printf(" Transaction: %s\n Index: %d\n Hash: %s\n",itr->srcDest,get_index(itr),itr->hash) ;
     }
-}
+}*/
 
 /*int main(int argc,char *argv[]) {
     srand(time(NULL)) ;

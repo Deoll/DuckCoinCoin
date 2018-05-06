@@ -28,23 +28,23 @@ int main(int argc, char const *argv[]) {
 			}
 		}
 		else {
-			printf("Argument pour cheater : num_block_delete [num_trans_delete]\n");
+			printf("Cheater arguments : num_block_delete [num_trans_delete]\n");
 			exit(6) ;
 		}
 	}
 
-	printf(" Création de la blockchain avec difficulté de %d...\n",diff ) ;
+	printf(" Creating blockchain with difficulty %d...\n",diff ) ;
 	Blockchain blockchain = create_blockchain(diff) ;
 	printf(" Done.\n") ;
 
 	printf("\n ------------------------------------------------\n\n") ;
 
-	printf(" Ajout de %d blocks avec %d transactions max à la blockchain...\n",nb_b,nb_t) ;
+	printf(" Adding %d blocks with %d transactions max to blockchain...\n",nb_b,nb_t) ;
 	Block b = get_block(blockchain,0) ;
 	Block b2 ;
 	for (int i = 1; i <= nb_b; ++i) {
 		int r = (rand()%nb_t)+1;
-		printf(" Ajout bloc n°%d avec %d transactions\n",i,r);
+		printf(" Adding bloc n°%d with %d transactions\n",i,r);
 		TransactionDeque t = init_transaction_deque();
 		for (int j = 0; j < r; ++j)
 			add_transaction_to_transactionDeque(t) ;
@@ -57,26 +57,26 @@ int main(int argc, char const *argv[]) {
 	if (cheater == 'y'){
 		if (num_trans == NULL){
 			printf("\n ------------------------------------------------\n\n") ;
-			printf(" Cheater de bloc, activate... \n") ;
+			printf(" Cheater bloc, activate... \n") ;
 			cheater_block(blockchain,num_block) ;
 		}
 		else{
 			printf("\n ------------------------------------------------\n\n") ;
-			printf(" Cheater de transaction, activate... \n") ;
+			printf(" Cheater transaction, activate... \n") ;
 			cheater_transaction(blockchain,num_block,num_trans) ;
 		}
 	}
 	printf("\n ------------------------------------------------\n\n") ;
-	printf(" Vérifier l'integrité de la blockchain (y/n): \t");
+	printf(" Would you like to check blockchain integrity ? (y/n): \t");
 	char verif ;
 	int v1,v2 ;
 	if (scanf("%s",&verif)) {} // pour eviter le warning 
 	if (verif =='y') {
-		printf("\n Vérification n°1...\n");
+		printf("\n Checking n°1...\n");
 		v1 = verification_1(blockchain) ;
 		printf(" Done. Result: %d\n",v1);
 		printf("\n ------------------------------------------------\n\n") ;
-		printf(" Vérification n°2...\n");
+		printf(" Checking n°2...\n");
 		v2 = verification_2(blockchain) ;
 		printf(" Done. Result: %d\n",v2);
 
@@ -85,7 +85,7 @@ int main(int argc, char const *argv[]) {
 
 	printf("\n ------------------------------------------------\n\n") ;
 
-	printf(" Suppression de la blockchain...\n") ;
+	printf(" Suppressing blockchain...\n") ;
 	delete_Blockchain(blockchain) ;
 	printf(" Done.\n") ;
 

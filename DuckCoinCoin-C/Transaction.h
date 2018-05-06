@@ -90,7 +90,7 @@ void hash_Merkle_tree(TransactionDeque transactions, char hash[]) ;
  * 
  * @param t the TansactionDeque to display
  */
-void display_info(TransactionDeque t) ;
+//void display_info(TransactionDeque t) ;
 
 #endif
 

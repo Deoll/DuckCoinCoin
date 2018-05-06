@@ -85,4 +85,10 @@ TransactionDeque get_transaction(Block block) ;
  * @param block regular block
  */
 void remove_block(Block block) ;
+/**
+ *
+ * @brief testing values into a block
+ *
+ */
+//void display_info_block(Block block);
 #endif

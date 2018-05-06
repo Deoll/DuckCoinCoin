@@ -84,18 +84,32 @@ void remove_block(Block block) {
 	block = NULL ;
 }
 /* ******************************************************* */
+
+
+/* *********************TESTS***************************** */
 /*
-void minage_naif(Block block, int difficulty){ 
-	int i=0;
-	calcul_hash_block(block);
-	while (i<difficulty){
-		if (block->hashCour[i] != '0'){
-			++(block->nonce);
-			calcul_hash_block(block);
-			i=0;
-		}
-		else
-			++i;
-	}
+void display_info_block(Block block) {
+	printf("Block info\n index: %d\n Transactions:\n",block->index) ;
+	display_info(block->transactions) ;
+	printf("timeStamp: %s\n hash precedent: %s\n",block->timeStamp,block->hashPrev);
+	printf("nombre de transactions: %d\n hash transactions: %s\n",block->nbTransaction,block->hashTreeRoot);
+	printf("nonce: %d\n hash du block: %s\n",block->nonce,block->hashCour) ;
 }
-*/
+
+
+int main(void) {
+	srand(time(NULL)) ;
+    TransactionDeque t = init_transaction_deque() ;
+    int i;
+    for (i=0; i<5;i++) 
+        add_transaction_to_transactionDeque(t) ;
+    Block b = create_block(t,0,"") ;
+    display_info_block(b) ;
+    minage(b,4);
+    printf("toto\n");
+    display_info_block(b) ;
+    printf("start remove\n");
+    remove_block(b) ;
+    printf("fin remove\n");
+	return 0 ;
+}*/
