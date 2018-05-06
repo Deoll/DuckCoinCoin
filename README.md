@@ -1,3 +1,3 @@
 # DuckCoinCoin
-#1stNote - File from master branch are C language     
+#1stNote - Directory "DuckCoinCoin-C" contains all C files
 #2ndNote - Directory "DuckCoinCoin" is a java project usable in Eclipse
