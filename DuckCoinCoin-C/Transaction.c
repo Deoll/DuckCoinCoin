@@ -97,9 +97,8 @@ void add_transaction_to_transactionDeque(TransactionDeque t){
 void remove_transaction(TransactionDeque t, int index) { 
     assert(!isEmpty(t));
     if(index>=t->size){
-        printf("Il y a seulement %d transactions dans ce block, vous essayer de supprimer la transaction à l'index %d\n",t->size,index);
-        printf("Echec de la suppression de la transaction.\n");
-        return ;
+       printf("Index entered is higher than max transactions. Last transactions is removed in stead of that one\n");
+       index = t->size - 1 ;
     }
     Transaction itr = t->sentinel->next ;
     while (index--) 
