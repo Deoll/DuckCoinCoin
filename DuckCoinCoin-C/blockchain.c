@@ -158,6 +158,7 @@ int verif_hash_block(Blockchain B,Block b) {
 	return unic ;
 }
 
+/*	this function was used to test the module		
 
 void display_info_block(Block block) {
 	printf("Block info\n index: %d\n Transactions:\n",block->index) ;
@@ -165,6 +166,9 @@ void display_info_block(Block block) {
 	printf("nombre de transactions: %d\n hash transactions: %s\n",block->nbTransaction,block->hashTreeRoot);
 	printf("nonce: %d\n hash du block: %s\n",block->nonce,block->hashCour) ;
 }
+
+*/
+
 
 bool verif_hash_block_naif (Block b,int d) {
 	int nonce = b->nonce ;
