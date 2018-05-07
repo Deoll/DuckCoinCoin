@@ -7,6 +7,7 @@
 
 #include "cheater.h"
 
+/*----------------------------------------------------------------*/
 
 void cheater_block(Blockchain blockchain, int indexBlock){
 	clock_t debut = clock() ;		//start chrono
@@ -15,6 +16,8 @@ void cheater_block(Blockchain blockchain, int indexBlock){
 	clock_t fin = clock() ;			//fin chrono
 	printf("temps CPU = %.2f secondes \n", (double) (fin-debut)/CLOCKS_PER_SEC ) ;
 }
+
+/*----------------------------------------------------------------*/
 
 void cheater_transaction(Blockchain blockchain, int indexBlock, int indexTransaction){
 	clock_t debut = clock() ;  		//start timer
