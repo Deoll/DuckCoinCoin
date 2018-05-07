@@ -9,7 +9,7 @@
 #include "Transaction.h"
 
 
-/********FONCTION DE CREATION DE DATE*************/
+/********DATE CREATION FUNCTION*************/
 
 char * getTimeStamp(){
     time_t ltime;
@@ -17,14 +17,14 @@ char * getTimeStamp(){
     return ctime(&ltime);
 }
 
-/*************************************************/
+/******************STRUCTURS*********************/
 
 struct s_transaction {
     struct s_transaction *next ;
     struct s_transaction *prev ;
     int index ;
     char srcDest[512] ;
-    char hash[SHA256_BLOCK_SIZE*2 + 1] ; // calcul et stockage du hash directement à l'ajout d'une transaction dans la deque
+    char hash[SHA256_BLOCK_SIZE*2 + 1] ; 
 } ;
 
 struct s_transactionDeque {
@@ -32,7 +32,7 @@ struct s_transactionDeque {
     int size ;
 } ;
 
-/****************************************************/
+/******************FUNCTIONS**********************/
 
 TransactionDeque transaction_genesis() {
    TransactionDeque t = malloc(sizeof(struct s_transactionDeque)) ;
@@ -48,13 +48,19 @@ TransactionDeque transaction_genesis() {
    return t ;
 }
 
+/*************************************************/
+
 void create_transaction(char trans[512]) {
     sprintf(trans,"Source-Destination : %d",rand()%MAX_VALUE) ;
 }
 
+/*************************************************/
+
 char * getSrcDest(TransactionDeque t) {
     return t->sentinel->next->srcDest ;
 }
+
+/*************************************************/
 
 TransactionDeque init_transaction_deque() {
     TransactionDeque t = malloc(sizeof(struct s_transactionDeque)) ;
@@ -64,6 +70,8 @@ TransactionDeque init_transaction_deque() {
     t->size = 0 ;
     return t ;
 }
+
+/*************************************************/
 
 bool isEmpty(TransactionDeque t){
     return t->size == 0;
@@ -76,6 +84,7 @@ void set_hash_transaction(Transaction  transaction) {
     sha256ofString(transaction->srcDest, transaction->hash) ;
 }
 
+/*************************************************/
 
 void add_transaction_to_transactionDeque(TransactionDeque t){
     Transaction new = malloc(sizeof(struct s_transaction)) ;
@@ -89,6 +98,7 @@ void add_transaction_to_transactionDeque(TransactionDeque t){
     t->size++ ;
 }
 
+/*************************************************/
 
 void remove_transaction(TransactionDeque t, int index) { 
     assert(!isEmpty(t));
@@ -105,6 +115,7 @@ void remove_transaction(TransactionDeque t, int index) {
     --(t->size) ;
 }
 
+/*************************************************/
 
 void delete_transaction_deque(TransactionDeque t){
     while(t->size) {
@@ -114,19 +125,21 @@ void delete_transaction_deque(TransactionDeque t){
     free(t) ;
 }
 
+/*************************************************/
 
 int get_index(Transaction transaction) { 
     return transaction->index ;
 }
 
+/*************************************************/
+
 int get_nb_total_transactions(TransactionDeque t) {
     return t->size ;
 }
 
+/*************************************************/
+
 void hash_Merkle_tree(TransactionDeque t, char *hash){
- /*   (void)t ;
-    hash = "" ;
-    */
     assert(!isEmpty(t));
     int taille = t->size ;
     Transaction itr ;
@@ -139,7 +152,7 @@ void hash_Merkle_tree(TransactionDeque t, char *hash){
 
     char hashTab[taille/2+1][SHA256_BLOCK_SIZE*2 + 1] ; // Stocke Nb_transactions/2 Hashs
    
-    // Si nombre impair, taille>t-size, permet de gérer le dédoublement du dernier hash
+    // if impair, taille>t-size, copying last hash
     if (taille > t->size){
         sprintf(c,"%s%s",t->sentinel->prev->srcDest,t->sentinel->prev->srcDest) ;
         sha256ofString(c,hashTab[taille/2-1]) ;
@@ -152,7 +165,7 @@ void hash_Merkle_tree(TransactionDeque t, char *hash){
     }
 
 
-    // initialisation de hashTab
+    // initialisation of hashTab variable
     while (itr != t->sentinel && cpt >= 0) {
         sprintf(c,"%s%s",itr->prev->srcDest,itr->srcDest) ;
         sha256ofString(c,hashTab[cpt]) ;
@@ -178,7 +191,9 @@ void hash_Merkle_tree(TransactionDeque t, char *hash){
     strcpy(hash,hashTab[0]);
 } 
 
-// fonction pour tester les valeurs d'un bloc
+/***********************TESTS**************************/
+
+// testing fonction
 /*void display_info(TransactionDeque t){
     for(Transaction itr = t->sentinel->next;itr != t->sentinel;itr=itr->next){
         printf(" Transaction: %s\n Index: %d\n Hash: %s\n",itr->srcDest,get_index(itr),itr->hash) ;
