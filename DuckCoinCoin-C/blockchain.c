@@ -58,10 +58,10 @@ void remove_block_from_blockchain(Blockchain blockchain,int indexBlock) {
 	assert((indexBlock >= 0) && (blockchain->nbBlocks > indexBlock)) ;
 	Block block = blockchain->sentinel->next ;
 	while (indexBlock--)
-		block = block->next ;	//on trouve block à suppr
+		block = block->next ;	//used to find the block to delete
 	block->next->prev = block->prev ;				
 	block->prev->next = block->next ;
-	remove_block(block) ;								//on le free
+	remove_block(block) ;								//we free it
 	--(blockchain->nbBlocks) ;
 }
 
@@ -88,11 +88,11 @@ int get_difficulty(Blockchain b) {
 
 void rebuild_Blockchain(Blockchain blockchain, int indexBlock) {
 	Block cur = blockchain->sentinel->next ;
-	while (indexBlock--) // on va au block a partir du quel on recalcul les hash
+	while (indexBlock--) // we go to the block to which we re-calculate the hash
 		cur = cur->next ;
 
-	while (cur != blockchain->sentinel) { // tq pas fin de la blockchain 
-		if(cur->prev == blockchain->sentinel) { // si on rebuild a partir du genesis
+	while (cur != blockchain->sentinel) { // while not the end of BlockChain
+		if(cur->prev == blockchain->sentinel) { // if we rebuild since the genesis
 			delete_transaction_deque(cur->transactions) ;
 			cur->transactions = transaction_genesis() ;
 			cur->nbTransaction = 1 ;
@@ -116,10 +116,10 @@ void rebuild_Blockchain(Blockchain blockchain, int indexBlock) {
 
 void delete_Blockchain (Blockchain blockchain){
 	while (blockchain->nbBlocks){
-		remove_block_from_blockchain(blockchain,0) ; //remove le premier element de la blockchain
+		remove_block_from_blockchain(blockchain,0) ; //remove  first element of the BlockChain
 	}
 	free(blockchain->sentinel) ;
-	free(blockchain) ;							//free la blockchain
+	free(blockchain) ;							//free the blockchain
 }
 
 
