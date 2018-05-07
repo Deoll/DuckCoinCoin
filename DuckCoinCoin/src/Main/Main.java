@@ -26,11 +26,11 @@ public class Main {
 			// Display the BlockChain
 			BlockChain B=BCJsonUtils.BCJsonReader(str) ; 
 			B.all_blocks_display() ; 
-			
+
 			// Check BlockChain integrity
 			if(B.verif_1() && B.verif_2() ) System.out.println("BlockChain passed integrity tests") ;
 			else throw new Exception("BlockChain integrity compromised") ;
-			
+
 		}
 		// Not using an existing BlockChain
 		else {
@@ -58,14 +58,16 @@ public class Main {
 			B.creating_blockchain(nb_bloc, adr, nb_trans_max) ; 
 			B.all_blocks_display() ; 
 
-			// Store BlockChain with Json if user wants to using the chosen name to save it
-			System.out.println("Do you want to store your blockchain with Json ?(y/n) ") ; 
-			sc.nextLine() ; 
-			str=sc.nextLine() ; 
-			if(str.compareTo("y") ==0 || str.compareTo("Y") ==0) {
-				System.out.print("Enter the namefile wanted to save your blockchain : ") ; 
+			if(ver==1){
+				// Store BlockChain with Json if user wants to using the chosen name to save it
+				System.out.println("Do you want to store your blockchain with Json ?(y/n) ") ; 
+				sc.nextLine() ; 
 				str=sc.nextLine() ; 
-				BCJsonUtils.BCJsonWriter(B, str) ; 
+				if(str.compareTo("y") ==0 || str.compareTo("Y") ==0) {
+					System.out.print("Enter the namefile wanted to save your blockchain : ") ; 
+					str=sc.nextLine() ; 
+					BCJsonUtils.BCJsonWriter(B, str) ; 
+				}
 			}
 
 			// Test removal of a block and rebuilding(Equivalent of C cheater) (Disable by default, uncomment below to try it) 
