@@ -61,7 +61,7 @@ void remove_block_from_blockchain(Blockchain blockchain,int indexBlock) {
 		block = block->next ;	//used to find the block to delete
 	block->next->prev = block->prev ;				
 	block->prev->next = block->next ;
-	remove_block(block) ;								//we free it
+	remove_block(block) ;	//we free it
 	--(blockchain->nbBlocks) ;
 }
 
@@ -137,6 +137,8 @@ int verif_hash_block(Blockchain B,Block b) {
 	return unic ;
 }
 
+/*----------------------------------------------------------------*/
+
 /*	this function was used to test the module		
 
 void display_info_block(Block block) {
@@ -148,6 +150,7 @@ void display_info_block(Block block) {
 
 */
 
+/*----------------------------------------------------------------*/
 
 bool verif_hash_block_naif (Block b,int d) {
 	int nonce = b->nonce ;
@@ -164,12 +167,16 @@ bool verif_hash_block_naif (Block b,int d) {
 
 }
 
+/*----------------------------------------------------------------*/
+
 bool genesis_is_the_first_block(Blockchain b) {
 	Block bl = b->sentinel->next ;
 	if (strcmp(bl->hashPrev,"0")==0 && strcmp(getSrcDest(bl->transactions),"Genesis")==0 && bl->nonce == 0)
 		return true ;
 	return false ;
 }
+
+/*----------------------------------------------------------------*/
 
 int verification_1(Blockchain b) {
 	Block itr = b->sentinel->next->next ;
@@ -191,6 +198,8 @@ int verification_1(Blockchain b) {
 	return 0 ;
 }
 
+/*----------------------------------------------------------------*/
+
 int verification_2(Blockchain b) {
 	char str[SHA256_BLOCK_SIZE*2 + 1] ;
 	Block itr = b->sentinel->next ;
@@ -207,7 +216,6 @@ int verification_2(Blockchain b) {
 }
 
 /*-----------------------------------------------------------------*/
-
 
 //---------TESTS----------//
 
