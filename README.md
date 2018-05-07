@@ -7,8 +7,12 @@ Work done:
 C: version 1
 Java: version 1 and 2
 
-How to use C version: ./main difficulty nbBlocks nbTransactions y/n(cheater) [indexBlockToDelete] [indexTransactionToDelete]
+How to use C version: ./main difficulty nbBlocks nbTransactions y/n [indexBlockToDelete [indexTransactionToDelete]]
 How to use Java: run from Eclipse
+
+
+
+Group n°37
 
 Ollivier Denis
 Furet Maxime
