@@ -6,7 +6,6 @@
 
 int main(int argc, char const *argv[]) {
 	srand(time(NULL));
-	// VERSION QUI NE MARCHE PAS : ./test 2 3 4 n
 	if (argc<5 || argc>7){
 		printf("Usage :%s difficulté nbr_block nbr_transaction y/n(cheater) [si cheater : num_block_delete [num_trans_delete] ] \n",argv[0]);
 		exit(5) ;
